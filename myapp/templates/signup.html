@@ -40,9 +40,18 @@
                     {% endif %}
 
                     <div class="wow fadeIn" data-wow-delay="0.3s">
-                        <form method="post" action="{% url 'signup' %}">
+                        <form method="post" action="{% url 'signup' %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row g-3">
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <select  id="" name="usertype">
+                                            <option value="">---Usertype---</option>
+                                            <option value="">Customer</option>
+                                            <option value="">Vendor</option>
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="col-md-12">
                                     <div class="form-floating">
                                         <input type="text" class="form-control" id="name" name = "name" placeholder="Your Name">
@@ -71,6 +80,12 @@
                                     <div class="form-floating">
                                         <input type="password" class="form-control" id="confirm_password" name = "confirm_password" placeholder="Your confirm password">
                                         <label for="password">Your confirm password</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="file" class="form-control" id="profile" name = "profile" placeholder="Your profile picture">
+                                        <label for="profile">Your profile picture</label>
                                     </div>
                                 </div>
                                 <div class="col-12">

@@ -3,10 +3,14 @@ from .models import *
 from django.core.mail import send_mail
 from django.conf import settings
 import random
+from django.views.decorators.csrf import csrf_exempt
 
 # Create your views here.
 def index(request):
     return render(request, 'index.html')
+
+def vindex(request):
+    return render(request, 'Vindex.html')
 
 def about(request):
     return render(request, 'about.html')
@@ -26,7 +30,9 @@ def signup(request):
                        name = request.POST['name'],
                        email = request.POST['email'],
                        mobile = request.POST['mobile'],
-                       password = request.POST['password']
+                       password = request.POST['password'],
+                       uprofile = request.FILES['profile'],
+                       usertype = request.POST['usertype']
                    )
                    msg = "Signup Successfully!!"
                    return render(request, 'signup.html',{'msg':msg})
@@ -36,13 +42,18 @@ def signup(request):
     else:
         return render(request, 'signup.html')   
     
+# @csrf_exempt    
 def login(request):
     if request.method == "POST":
         try:
             user = User.objects.get(email = request.POST['email'])
             if user.password == request.POST['password']:
                 request.session['email'] = user.email
-                return redirect('index')
+                request.session['profile'] = user.profile.url
+                if user.usertype == "customer":
+                    return redirect('index')
+                else:
+                    return redirect('vindex')
             else:
                 msg = "Password does not match!!"
                 return render(request, 'login.html',{'msg':msg}) 
@@ -54,6 +65,7 @@ def login(request):
      
 def logout(request):
     del request.session['email']
+    del request.session['profile']
     return redirect('login')
 
 def cpass(request):
@@ -127,6 +139,10 @@ def newpass(request):
             pass
    else:
        return render(request, 'newpass.html')
+   
+def uprofile(request):
+    user = User.objects.get(email = request.session['email'])
+    return render(request, 'uprofile.html', {'user': user})
 
 def Error(request):
     return render(request, 'Error.html')

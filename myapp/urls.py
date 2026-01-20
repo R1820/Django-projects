@@ -20,6 +20,7 @@ from myapp import views
 
 urlpatterns = [
     path('index/', views.index, name='index'),
+    path('vindex/', views.vindex, name='vindex'),
     path('about/', views.about, name='about'),
     path('contact/', views.contact, name='contact'),
     path('signup/', views.signup, name='signup'),
@@ -29,6 +30,7 @@ urlpatterns = [
     path('fpass/', views.fpass, name='fpass'),
     path('otp/', views.otp, name='otp'),
     path('newpass/', views.newpass, name='newpass'),
+    path('uprofile/', views.uprofile, name='uprofile'),
     path('Error/', views.Error, name='Error'),
     path('feature/', views.feature, name='feature'),
     path('service/', views.service, name='service'),
