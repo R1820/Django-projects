@@ -1,4 +1,4 @@
-{% extends 'header.html' %}
+{% extends 'vheader.html' %}
 {% load static %}
 {% block content %}
 
@@ -7,14 +7,14 @@
         <div class="container py-5">
             <div class="row g-3 align-items-center">
                 <div class="col-lg-6 text-center text-lg-start">
-                    <h1 class="display-1 mb-0 animated slideInLeft">Profile-Update</h1>
+                    <h1 class="display-1 mb-0 animated slideInLeft">Add-design</h1>
                 </div>
                 <div class="col-lg-6 animated slideInRight">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb justify-content-center justify-content-lg-end mb-0">
                             <li class="breadcrumb-item"><a class="text-primary" href="#!">Home</a></li>
                             <li class="breadcrumb-item"><a class="text-primary" href="#!">Pages</a></li>
-                            <li class="breadcrumb-item text-secondary active" aria-current="page">Profile-Update</li>
+                            <li class="breadcrumb-item text-secondary active" aria-current="page">Add-design</li>
                         </ol>
                     </nav>
                 </div>
@@ -24,11 +24,11 @@
     <!-- Hero End -->
 
 
-    <!-- Profile Update Start -->
+    <!-- Add-design Start -->
     <div class="container-fluid py-5">
         <div class="container py-5">
             <div class="text-center wow fadeIn" data-wow-delay="0.1s">
-                <h1 class="mb-5">Have Any Query? <span class="text-uppercase text-primary bg-light px-2">Profile-Update</span></h1>
+                <h1 class="mb-5">Have Any Query? <span class="text-uppercase text-primary bg-light px-2">Add-design</span></h1>
             </div>
             <div class="row justify-content-center">
                 <div class="col-lg-7">
@@ -40,32 +40,43 @@
                     {% endif %}
 
                     <div class="wow fadeIn" data-wow-delay="0.3s">
-                        <form method="post" action="{% url 'uprofile' %}" enctype="multipart/form-data">
+                        <form method="post" action="{% url 'addproject' %}" enctype="multipart/form-data">
                             {% csrf_token %}
                             <div class="row g-3">
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="text" class="form-control" id="name" name = "name" value="{{ user.name }}">
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <input type="email" class="form-control" id="email" name = "email" value="{{ user.email }}">
-                                </div>
-                                <div class="col-md-12">
-                                    <div class="form-floating">
-                                        <input type="tel" class="form-control" id="mobile" name = "mobile" value="{{ user.mobile }}">
+                                        <select  id="" name="ccategory">
+                                            <option value="ccategory"hidden>---Category---</option>
+                                            <option value="residence">Residence</option>
+                                            <option value="corporate">Corporate</option>
+                                        </select>
                                     </div>
                                 </div>
-                                
                                 <div class="col-md-12">
                                     <div class="form-floating">
-                                        <input type="file" class="form-control" id="profile" name = "uprofile" value="{{ user.uprofile }}">
+                                        <input type="text" class="form-control" id="ptitle" name = "ptitle" placeholder="Your Project name">
+                                        <label for="ptitle">Your Project name</label>
                                     </div>
                                 </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="number" class="form-control" id="pprice" name = "pprice" placeholder="Your price">
+                                        <label for="pprice">Your price</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="text" class="form-control" id="summary" name = "summary" placeholder="Summary">
+                                        <label for="summary">Summary</label>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-floating">
+                                        <input type="file" class="form-control" id="pimage" name = "pimage" placeholder="Your project picture">
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <button class="btn btn-primary w-100 py-3" type="submit">Update-Profile</button>
+                                    <button class="btn btn-primary w-100 py-3" type="submit">Add-design</button>
                                 </div>
                             </div>
                         </form>
@@ -74,7 +85,7 @@
             </div>
         </div>
     </div>
-    <!-- Profile Update End -->
+    <!-- Add-design End -->
 
 
     <!-- Newsletter Start -->

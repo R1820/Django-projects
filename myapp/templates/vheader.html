@@ -47,7 +47,7 @@
     <div class="container-fluid sticky-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light border-bottom border-2 border-white">
-                <a href="{% url 'index' %}" class="navbar-brand">
+                <a href="{% url 'vindex' %}" class="navbar-brand">
                     <h1>iSTUDIO</h1>
                 </a>
                 <button type="button" class="navbar-toggler ms-auto me-0" data-bs-toggle="collapse"
@@ -56,15 +56,15 @@
                 </button>
                 <div class="collapse navbar-collapse" id="navbarCollapse">
                     <div class="navbar-nav ms-auto">
-                        <a href="{% url 'index' %}" class="nav-item nav-link active">Home</a>
+                        <a href="{% url 'vindex' %}" class="nav-item nav-link active">Home</a>
                         <a href="{% url 'about' %}" class="nav-item nav-link">About</a>
-                        <a href="{% url 'service' %}" class="nav-item nav-link">Add-design</a>
-                        <a href="{% url 'project' %}" class="nav-item nav-link">View-design</a>
+                        <a href="{% url 'addproject' %}" class="nav-item nav-link">Add-design</a>
+                        <a href="{% url 'viewproject' %}" class="nav-item nav-link">View-design</a>
 
                         {% if request.session.email %}
                         <a href="{% url 'cpass' %}" class="nav-item nav-link">change-passwod</a>
                         <a href="{% url 'logout' %}" class="nav-item nav-link">logout</a>
-                        <a href="{% url 'profile' %}"><img src="{{request.session.profile}}" alt="" height = "30px" width = "30px" style="border-radius: 50%;"></a>
+                        <a href="{% url 'uprofile' %}"><img src="{{request.session.uprofile}}" alt="" height = "30px" width = "30px" style="border-radius: 50%;"></a>
                         {% else %}
                         
                         <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>

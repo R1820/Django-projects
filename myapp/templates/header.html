@@ -73,7 +73,7 @@
                         {% if request.session.email %}
                         <a href="{% url 'cpass' %}" class="nav-item nav-link">change-passwod</a>
                         <a href="{% url 'logout' %}" class="nav-item nav-link">logout</a>
-                        <a href="{% url 'profile' %}"><img src="{{request.session.profile}}" alt="" height = "30px" width = "30px" style="border-radius: 50%;"></a>
+                        <a href="{% url 'uprofile' %}"><img src="{{request.session.profile}}" alt="" height = "30px" width = "30px" style="border-radius: 50%;"></a>
                         {% else %}
                         
                         <a href="{% url 'contact' %}" class="nav-item nav-link">Contact</a>

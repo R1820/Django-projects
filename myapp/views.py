@@ -42,14 +42,14 @@ def signup(request):
     else:
         return render(request, 'signup.html')   
     
-# @csrf_exempt    
+@csrf_exempt    
 def login(request):
     if request.method == "POST":
         try:
             user = User.objects.get(email = request.POST['email'])
             if user.password == request.POST['password']:
                 request.session['email'] = user.email
-                request.session['profile'] = user.profile.url
+                request.session['uprofile'] = user.uprofile.url
                 if user.usertype == "customer":
                     return redirect('index')
                 else:
@@ -57,7 +57,8 @@ def login(request):
             else:
                 msg = "Password does not match!!"
                 return render(request, 'login.html',{'msg':msg}) 
-        except:
+        except Exception as e:
+            # print("***",e)
             msg = "Email does not match!!"
             return render(request, 'login.html',{'msg':msg})        
     else:
@@ -65,7 +66,7 @@ def login(request):
      
 def logout(request):
     del request.session['email']
-    del request.session['profile']
+    del request.session['uprofile']
     return redirect('login')
 
 def cpass(request):
@@ -142,8 +143,44 @@ def newpass(request):
    
 def uprofile(request):
     user = User.objects.get(email = request.session['email'])
-    return render(request, 'uprofile.html', {'user': user})
+    if request.method == "POST":
+        user.name = request.POST['name']
+        user.mobile = request.POST['mobile']
+        try:
+            user.uprofile = request.FILES['uprofile']
+            user.save()
+            request.session['uprofile'] = user.uprofile.url
+        except:
+            pass
+        user.save()
+        return redirect('index')
+    else:   
+        return render(request, 'uprofile.html', {'user': user})
+    
+def addproject(request):
+    if request.method == "POST":
+        try:
+            user = User.objects.get(email = request.session['email'])
+            vendor.objects.create(
+                user = user,
+                ccategory = request.POST['ccategory'],
+                ptitle = request.POST['ptitle'],
+                pprice = request.POST['pprice'],
+                summary = request.POST['summary'],
+                pimage = request.FILES['pimage'],
+            )
+            msg = "Design added Successfully!!"
+            return render(request, 'addproject.html',{'msg':msg})
+        except Exception as e:
+            print("***", e)
+            msg = "Something went wrong! Please try again."
+        
+    else:    
+        return render(request, 'addproject.html')
 
+def viewproject(request):
+    return render(request, 'viewproject.html')
+ 
 def Error(request):
     return render(request, 'Error.html')
     
